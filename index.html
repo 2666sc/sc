@@ -17,6 +17,7 @@
       color: #fff;
       font-family: 'Times New Roman', Times, serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow: hidden;
@@ -49,12 +50,32 @@
     }
 
     h1 {
-      font-size: 35rem;
+      font-size: 7rem;
       letter-spacing: 0.5rem;
       animation: fadeIn 3s ease-in-out;
       z-index: 1;
       position: relative;
       font-family: 'Times New Roman', Times, serif;
+    }
+
+    .subtitle {
+      font-size: 2rem;
+      margin-top: -0.5rem;
+      animation: fadeIn 4s ease-in-out;
+      z-index: 1;
+      position: relative;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 10vw;
+        letter-spacing: 0.1rem;
+      }
+      .subtitle {
+        font-size: 5vw;
+        margin-top: 1rem;
+      }
     }
 
     @keyframes fadeIn {
@@ -65,9 +86,16 @@
 </head>
 <body>
   <h1>SC</h1>
+  <div class="subtitle">2666</div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="beethoven7-allegretto.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <script>
     const body = document.querySelector('body');
+    const audio = document.getElementById('bg-music');
 
     function activateEffect() {
       body.classList.add('active');
@@ -76,6 +104,13 @@
         body.classList.remove('active');
       }, 1000);
     }
+
+    // 5초 후 음악 재생
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        audio.play().catch(e => console.log('Audio autoplay blocked:', e));
+      }, 5000);
+    });
 
     document.addEventListener('mousemove', activateEffect);
     document.addEventListener('click', activateEffect);
